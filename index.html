@@ -308,10 +308,7 @@
       position: relative;
       border-radius: 24px;
       overflow: hidden;
-
-      /* smoother, less harsh gradient */
       background: linear-gradient(180deg, #2f80ff 0%, #1d4ed8 42%, #0b1224 100%);
-
       box-shadow: var(--shadow-soft);
       height: 100%;
       display: flex;
@@ -319,7 +316,6 @@
       justify-content: center;
     }
 
-    /* glossy highlight */
     .skyline-card::before {
       content: "";
       position: absolute;
@@ -335,15 +331,12 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-
-      /* softer fade so it doesn’t look like a dark slab */
       background: linear-gradient(
         180deg,
         rgba(2, 6, 23, 0) 0%,
         rgba(2, 6, 23, 0.22) 52%,
         rgba(2, 6, 23, 0.65) 100%
       );
-
       pointer-events: none;
     }
 
@@ -372,8 +365,6 @@
       justify-content: space-between;
       align-items: center;
     }
-
-    .skyline-caption span.label { opacity: 0.8; }
 
     .skyline-chip {
       padding: 0.25rem 0.7rem;
@@ -695,6 +686,7 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Wix-style opening / preload -->
   <div id="preloader">
@@ -705,7 +697,8 @@
     <div class="preloader-bar-wrapper">
       <div class="preloader-bar"></div>
     </div>
-    <div class="preloader-text">Loading your co-op story…</div>
+    <!-- ✅ changed from "your" to "my" -->
+    <div class="preloader-text">Loading my co-op history…</div>
   </div>
 
   <div class="page-wrapper" id="page-wrapper">
@@ -1036,9 +1029,11 @@
     window.addEventListener("load", function () {
       const preloader = document.getElementById("preloader");
       const wrapper = document.getElementById("page-wrapper");
+
       setTimeout(() => {
         preloader.style.opacity = "0";
         preloader.style.transition = "opacity 0.5s ease-out";
+
         setTimeout(() => {
           preloader.style.display = "none";
           wrapper.classList.add("ready");
