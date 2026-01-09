@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Digital Co-op Experience – Ontario Public Service</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Optional Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ops-blue: #0c3c78;
+      --ops-blue-dark: #062247;
+      --ops-blue-light: #1d5fa8;
+      --accent-green: #32c768;
+      --accent-yellow: #f8b739;
+      --bg-light: #f4f6fb;
+      --card-bg: #ffffff;
+      --text-main: #1f2933;
+      --text-muted: #6b7280;
+      --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.14);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --transition-fast: 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* -------- Preloader (Wix-style intro) -------- */
+
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, #1b68c4 0, #02152d 45%, #010813 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      color: #fff;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .preloader-logo {
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .preloader-logo span.icon {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #4fd1c5, #22d3ee);
+      box-shadow: 0 0 14px rgba(59, 130, 246, 0.7);
+      font-size: 1.15rem;
+    }
+
+    .preloader-bar-wrapper {
+      width: 220px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+    }
+
+    .preloader-bar {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #4ade80, #22c55e, #22d3ee);
+      animation: preload-bar 2.3s ease-in-out forwards;
+    }
+
+    .preloader-text {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    @keyframes preload-bar {
+      0% { width: 0; }
+      40% { width: 45%; }
+      80% { width: 90%; }
+      100% { width: 100%; }
+    }
+
+    /* -------- Layout basics -------- */
+
+    .page-wrapper {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.7s ease-out;
+    }
+
+    .page-wrapper.ready {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(6, 34, 71, 0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
+    }
+
+    .nav-inner {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 0.65rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: #e5ecff;
+      font-weight: 700;
+      font-size: 0.98rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #4fd1c5, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #02152d;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.3rem;
+      font-size: 0.92rem;
+    }
+
+    nav a {
+      color: #e5e7eb;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color var(--transition-fast);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: #38bdf8;
+      transition: width var(--transition-fast);
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* -------- Hero section -------- */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0b3973 0%, #144b95 50%, #f4f6fb 100%);
+      color: #ffffff;
+      padding-bottom: 3.5rem;
+    }
+
+    .hero-inner {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 2.5rem 1.4rem 0;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-heading {
+      font-size: clamp(1.9rem, 2.7vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #dbeafe;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-tagline {
+      font-size: 0.95rem;
+      max-width: 540px;
+      color: #e0ecff;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.3rem 0 1.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      background: rgba(15, 23, 42, 0.34);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+    }
+
+    .badge span.icon {
+      font-size: 0.85rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      color: #cbd5f5;
+      margin-bottom: 1rem;
+    }
+
+    .hero-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.38);
+    }
+
+    .hero-meta-item span.icon {
+      font-size: 0.9rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #38bdf8, #22c55e);
+      color: #04101f;
+      box-shadow: 0 12px 22px rgba(15, 23, 42, 0.45);
+      margin-top: 0.7rem;
+    }
+
+    .hero-cta span.icon {
+      font-size: 1rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 210px;
+    }
+
+    /* ===========================
+       FIXED SHADING STARTS HERE
+       =========================== */
+
+    .skyline-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+
+      /* smoother, less harsh gradient */
+      background: linear-gradient(180deg, #2f80ff 0%, #1d4ed8 42%, #0b1224 100%);
+
+      box-shadow: var(--shadow-soft);
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    /* glossy highlight */
+    .skyline-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 25% 15%, rgba(255, 255, 255, 0.28), transparent 45%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 55%);
+      pointer-events: none;
+    }
+
+    .skyline-gradient {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+
+      /* softer fade so it doesn’t look like a dark slab */
+      background: linear-gradient(
+        180deg,
+        rgba(2, 6, 23, 0) 0%,
+        rgba(2, 6, 23, 0.22) 52%,
+        rgba(2, 6, 23, 0.65) 100%
+      );
+
+      pointer-events: none;
+    }
+
+    .skyline {
+      position: absolute;
+      inset: auto 0 0;
+      height: 80%;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.22), transparent 50%),
+        linear-gradient(0deg, #0f172a 0%, #0f172a 26%, transparent 26%) 50% 85%/ 100% 100% no-repeat;
+    }
+
+    /* ===========================
+       FIXED SHADING ENDS HERE
+       =========================== */
+
+    .skyline-caption {
+      position: relative;
+      z-index: 2;
+      padding: 1rem 1.2rem;
+      width: 100%;
+      color: #e5ecff;
+      font-size: 0.82rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .skyline-caption span.label { opacity: 0.8; }
+
+    .skyline-chip {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.75rem;
+    }
+
+    /* -------- Sections -------- */
+
+    .content {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 2.5rem 1.4rem 4.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section { margin-bottom: 2.5rem; }
+
+    .section-heading {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ops-blue-dark);
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .section-heading span.bar {
+      width: 28px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #22c55e);
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 1.3rem 1.4rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card + .card { margin-top: 1rem; }
+
+    .section-intro {
+      margin-bottom: 1.1rem;
+      color: var(--text-muted);
+      font-size: 0.94rem;
+    }
+
+    /* Employer section */
+
+    .employer-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.3fr);
+      gap: 1.1rem;
+      align-items: center;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+    }
+
+    .tag-pill {
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: var(--text-muted);
+      background: #f9fafb;
+    }
+
+    .employer-badges {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .employer-tile {
+      flex: 1 1 120px;
+      min-width: 120px;
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      border-radius: var(--radius-md);
+      color: #e5ecff;
+      padding: 0.65rem 0.75rem;
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.2);
+    }
+
+    .employer-tile:nth-child(2) {
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+    }
+
+    .employer-tile-title {
+      font-weight: 700;
+      font-size: 0.83rem;
+    }
+
+    /* Goals section */
+
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .goals-list {
+      list-style: none;
+      margin-top: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .goals-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+      color: var(--text-muted);
+    }
+
+    .goals-list li span.icon {
+      color: #22c55e;
+      font-size: 0.95rem;
+      margin-top: 0.08rem;
+    }
+
+    /* Job description section */
+
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+    }
+
+    .chip {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+    }
+
+    /* Reflections */
+
+    .reflection-card {
+      display: grid;
+      grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.2fr);
+      gap: 1rem;
+      align-items: center;
+      padding: 1.3rem 1.4rem;
+      border-radius: var(--radius-lg);
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 1.1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reflection-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.24rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      background: rgba(22, 163, 74, 0.09);
+      border: 1px solid rgba(22, 163, 74, 0.3);
+      color: #166534;
+    }
+
+    .reflection-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+      margin-bottom: 0.25rem;
+      color: var(--ops-blue-dark);
+    }
+
+    .reflection-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.55rem;
+    }
+
+    .reflection-text {
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .reflection-bullets {
+      list-style: none;
+      margin-top: 0.7rem;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .reflection-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .reflection-bullets span.icon {
+      color: #22c55e;
+      font-size: 0.9rem;
+    }
+
+    .reflection-illustration {
+      border-radius: 18px;
+      background: radial-gradient(circle at top, #e0f2fe 0, #eff6ff 45%, #e0f2fe 100%);
+      padding: 1rem;
+      position: relative;
+      min-height: 160px;
+      overflow: hidden;
+    }
+
+    .reflection-illustration::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.25;
+      background:
+        radial-gradient(circle at 0 0, #38bdf8, transparent 55%),
+        radial-gradient(circle at 100% 100%, #22c55e, transparent 55%);
+    }
+
+    .reflection-illustration-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      gap: 0.5rem;
+      text-align: center;
+      color: #0f172a;
+      font-size: 0.82rem;
+    }
+
+    .reflection-illustration-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
+    }
+
+    /* Conclusion section */
+
+    .conclusion-card { text-align: center; padding: 1.6rem 1.5rem; }
+
+    .conclusion-card p {
+      margin-bottom: 0.9rem;
+      font-size: 0.93rem;
+      color: var(--text-main);
+    }
+
+    .footer-note { font-size: 0.8rem; color: var(--text-muted); }
+
+    .back-to-top {
+      margin-top: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      background: #0f172a;
+      color: #e5e7eb;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.45);
+    }
+
+    /* -------- Scroll animation helpers -------- */
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .animate-on-scroll.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* -------- Responsive -------- */
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: minmax(0, 1fr); }
+      .hero { padding-bottom: 2.5rem; }
+      .hero-visual { order: -1; }
+      .employer-layout, .goals-grid, .reflection-card { grid-template-columns: minmax(0, 1fr); }
+      .nav-inner { flex-wrap: wrap; gap: 0.7rem; }
+      nav ul { gap: 0.9rem; font-size: 0.86rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-inner { padding-top: 1.8rem; }
+      .hero-heading { font-size: 1.6rem; }
+      .card, .reflection-card, .conclusion-card { padding: 1.1rem 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Wix-style opening / preload -->
+  <div id="preloader">
+    <div class="preloader-logo">
+      <span class="icon">◆</span>
+      <span>Web Term Report</span>
+    </div>
+    <div class="preloader-bar-wrapper">
+      <div class="preloader-bar"></div>
+    </div>
+    <div class="preloader-text">Loading your co-op story…</div>
+  </div>
+
+  <div class="page-wrapper" id="page-wrapper">
+    <header>
+      <div class="nav-inner">
+        <div class="brand">
+          <!-- Sigma removed -->
+          <span class="brand-icon"></span>
+          <span>Digital Co-op • OPS</span>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#abstract">Abstract</a></li>
+            <li><a href="#employer">Employer</a></li>
+            <li><a href="#goals">Goals</a></li>
+            <li><a href="#job">Work & Impact</a></li>
+            <li><a href="#reflections">Reflections</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy animate-on-scroll">
+          <h1 class="hero-heading">My Digital Co-op Experience at the Ontario Public Service</h1>
+          <p class="hero-subtitle">Fall 2025 · Digital Service Advisory · ServiceOntario</p>
+          <p class="hero-tagline">
+            I supported digital assessments, research, and training that help teams build
+            people-centred, data-informed services for the people of Ontario.
+          </p>
+
+          <div class="hero-badges">
+            <div class="badge">
+              <span class="icon">🧭</span>
+              <span>Digital Service Standard</span>
+            </div>
+            <div class="badge">
+              <span class="icon">📊</span>
+              <span>Jira Data & Dashboards</span>
+            </div>
+            <div class="badge">
+              <span class="icon">🤝</span>
+              <span>People-centred Design</span>
+            </div>
+          </div>
+
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <span class="icon">📍</span>
+              <span>595 Bay St, Toronto, ON</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="icon">⏱</span>
+              <span>4-month work term</span>
+            </div>
+          </div>
+
+          <button class="hero-cta" onclick="document.getElementById('abstract').scrollIntoView({behavior:'smooth'})">
+            <span class="icon">▼</span>
+            <span>Start reading the report</span>
+          </button>
+        </div>
+
+        <div class="hero-visual animate-on-scroll">
+          <div class="skyline-card">
+            <div class="skyline-gradient"></div>
+            <div class="skyline"></div>
+            <div class="skyline-caption">
+              <div>
+                <div style="font-size:0.78rem; opacity:0.85;">Ontario Public Service</div>
+                <div style="font-size:0.92rem; font-weight:600;">Digital Service Advisory</div>
+              </div>
+              <div class="skyline-chip">Service Design • Research • Assessments</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content">
+      <!-- Abstract -->
+      <section id="abstract" class="section">
+        <h2 class="section-heading">
+          <span class="bar"></span> Abstract
+        </h2>
+        <div class="card animate-on-scroll">
+          <p>
+            During Fall 2025, I completed a Digital Co-op term with the Ontario Public Service as part of the
+            Digital Service Advisory team within ServiceOntario. My role focused on supporting digital
+            assessments, training resources, Jira-based analysis, and research on digital standards and
+            service delivery practices.
+          </p>
+          <p style="margin-top:0.75rem;">
+            This report highlights my employer, work term goals, key responsibilities, and what I learned
+            about people-centred digital transformation in government.
+          </p>
+        </div>
+      </section>
+
+      <!-- Employer -->
+      <section id="employer" class="section">
+        <h2 class="section-heading">
+          <span class="bar"></span> About the Employer
+        </h2>
+        <p class="section-intro">
+          The Digital Service Advisory (DSA) team is part of the Customer Experience and Insights Branch
+          at ServiceOntario. DSA works with ministry partners to evaluate services and provide guidance
+          that helps make interacting with government simple, effective, and user-focused.
+        </p>
+
+        <div class="card employer-layout animate-on-scroll">
+          <div>
+            <h3 style="font-size:0.98rem; font-weight:700; color:var(--ops-blue-dark);">
+              Digital Service Advisory · ServiceOntario
+            </h3>
+            <p style="font-size:0.9rem; color:var(--text-main); margin-top:0.45rem;">
+              The team supports ministries in aligning with Ontario’s Digital Service Standard and the
+              Digital and Data Directive. They bring together service design, product management, research,
+              and policy perspectives to improve how services are designed and delivered.
+            </p>
+            <div class="tag-row">
+              <div class="tag-pill">Public sector · Ontario Government</div>
+              <div class="tag-pill">Service design & research</div>
+              <div class="tag-pill">Digital transformation</div>
+            </div>
+          </div>
+
+          <div class="employer-badges">
+            <div class="employer-tile">
+              <div class="employer-tile-title">Digital Assessments</div>
+              <div>Evaluating services against the Digital Service Standard and identifying improvement opportunities.</div>
+            </div>
+            <div class="employer-tile">
+              <div class="employer-tile-title">Digital Growth</div>
+              <div>Training, guidance, and coaching that help public servants build digital skills and mindsets.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work Term Goals -->
+      <section id="goals" class="section">
+        <h2 class="section-heading">
+          <span class="bar"></span> Work Term Goals
+        </h2>
+        <p class="section-intro">
+          At the beginning of the term, I set goals to strengthen my research and analysis skills, improve
+          my teamwork and communication, and deepen my understanding of people-centred digital service delivery.
+        </p>
+
+        <div class="goals-grid animate-on-scroll">
+          <div class="card">
+            <h3 style="font-size:0.96rem; font-weight:700; color:var(--ops-blue-dark);">Goals Set</h3>
+            <ul class="goals-list">
+              <li><span class="icon">✔</span><span>Build strong research and analysis skills using digital standards and Jira data.</span></li>
+              <li><span class="icon">✔</span><span>Learn how multidisciplinary teams collaborate on digital service delivery.</span></li>
+              <li><span class="icon">✔</span><span>Understand Ontario’s Digital Service Standard and Digital & Data Directive in practice.</span></li>
+              <li><span class="icon">✔</span><span>Develop confidence communicating in meetings, assessments, and training sessions.</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 style="font-size:0.96rem; font-weight:700; color:var(--ops-blue-dark);">Goals Achieved</h3>
+            <ul class="goals-list">
+              <li><span class="icon">⭐</span><span>Completed research scans and summaries on digital standards across Canada.</span></li>
+              <li><span class="icon">⭐</span><span>Supported improvements to digital assessment guidance and related resources.</span></li>
+              <li><span class="icon">⭐</span><span>Assisted with Jira dashboard and reporting tasks that informed team discussions.</span></li>
+              <li><span class="icon">⭐</span><span>Gained confidence collaborating with teammates and ministry partners in a digital environment.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Job & Contributions -->
+      <section id="job" class="section">
+        <h2 class="section-heading">
+          <span class="bar"></span> Job Description & Contributions
+        </h2>
+        <p class="section-intro">
+          As a Digital Co-op, I contributed to several streams of work that supported digital service
+          assessments, research, and capability building across the Ontario Public Service.
+        </p>
+
+        <div class="card animate-on-scroll">
+          <h3 style="font-size:0.96rem; font-weight:700; color:var(--ops-blue-dark); margin-bottom:0.4rem;">
+            Key Responsibilities
+          </h3>
+          <ul class="goals-list">
+            <li><span class="icon">🧪</span><span>Supported research on digital standards, best practices, and digital maturity across jurisdictions.</span></li>
+            <li><span class="icon">📊</span><span>Assisted with Jira data analysis and dashboard creation to support evidence-based conversations.</span></li>
+            <li><span class="icon">📚</span><span>Contributed to training materials and resources aligned with the Digital Service Standard.</span></li>
+            <li><span class="icon">🧩</span><span>Helped refine processes and guidance related to digital assessments and partner engagement.</span></li>
+          </ul>
+
+          <div class="chips-row">
+            <span class="chip">Research & policy analysis</span>
+            <span class="chip">Service design mindset</span>
+            <span class="chip">Data-informed decisions</span>
+            <span class="chip">Collaboration & open working</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reflections -->
+      <section id="reflections" class="section">
+        <h2 class="section-heading">
+          <span class="bar"></span> Reflecting on My Work Term Goals
+        </h2>
+        <p class="section-intro">
+          These reflections correspond to the learning goals I set at the beginning of the term in Experience Guelph.
+        </p>
+
+        <!-- Reflection 1 -->
+        <article class="reflection-card animate-on-scroll">
+          <div>
+            <div class="reflection-tag">
+              <span>Goal 1</span> · <span>Critical & Creative Thinking</span>
+            </div>
+            <div class="reflection-title">Inquiry & Analysis in Digital Service Work</div>
+            <div class="reflection-subtitle">Strengthening research and analysis through real projects.</div>
+            <p class="reflection-text">
+              Over the term, I learned how to move from gathering information to generating clear, actionable insight.
+              Working on cross-jurisdictional scans and Jira analysis helped me practice structuring research questions,
+              validating data, and summarizing findings so they supported team decisions.
+            </p>
+            <ul class="reflection-bullets">
+              <li><span class="icon">✔</span><span>Improved confidence in independent research tasks and evidence synthesis.</span></li>
+              <li><span class="icon">✔</span><span>Developed better judgment about what details are most relevant for decision-makers.</span></li>
+              <li><span class="icon">✔</span><span>Refined my ability to explain analysis in clear, accessible language.</span></li>
+            </ul>
+          </div>
+          <div class="reflection-illustration">
+            <div class="reflection-illustration-inner">
+              <div class="reflection-illustration-icon">📈</div>
+              <div>Research, dashboards, and standards work gave me a structured way to grow my analytical skills.</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Reflection 2 -->
+        <article class="reflection-card animate-on-scroll">
+          <div>
+            <div class="reflection-tag" style="border-color:rgba(59,130,246,0.35); background:rgba(59,130,246,0.07); color:#1d4ed8;">
+              <span>Goal 2</span> · <span>Professional & Ethical Behaviour</span>
+            </div>
+            <div class="reflection-title">Teamwork in a Multidisciplinary Environment</div>
+            <div class="reflection-subtitle">Learning to communicate openly and work in the open.</div>
+            <p class="reflection-text">
+              Being part of a multidisciplinary team showed me how important it is to share progress, ask questions,
+              and be transparent about uncertainties. Contributing to meetings, assessments, and training activities
+              helped me become more comfortable voicing ideas and supporting others’ work.
+            </p>
+            <ul class="reflection-bullets">
+              <li><span class="icon">✔</span><span>Gained confidence giving updates and asking clarifying questions in team settings.</span></li>
+              <li><span class="icon">✔</span><span>Learned how inclusive communication and respect support better outcomes for partners.</span></li>
+              <li><span class="icon">✔</span><span>Practiced balancing different priorities while staying collaborative and solution-focused.</span></li>
+            </ul>
+          </div>
+          <div class="reflection-illustration">
+            <div class="reflection-illustration-inner">
+              <div class="reflection-illustration-icon">🤝</div>
+              <div>Team discussions, assessments, and training work strengthened my communication and collaboration skills.</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Reflection 3 -->
+        <article class="reflection-card animate-on-scroll">
+          <div>
+            <div class="reflection-tag" style="border-color:rgba(248,187,61,0.6); background:rgba(248,187,61,0.12); color:#92400e;">
+              <span>Goal 3</span> · <span>Global Understanding</span>
+            </div>
+            <div class="reflection-title">People-Centred Design & Civic Impact</div>
+            <div class="reflection-subtitle">Seeing how digital approaches shape real public services.</div>
+            <p class="reflection-text">
+              Supporting digital service reviews helped me understand how accessibility, inclusion, and user needs are
+              built into recommendations. I saw that digital transformation is not just technical; it also requires
+              cultural change and a strong sense of responsibility to the people who rely on government services.
+            </p>
+            <ul class="reflection-bullets">
+              <li><span class="icon">✔</span><span>Deepened my understanding of people-centred design and its impact on service quality.</span></li>
+              <li><span class="icon">✔</span><span>Recognized how digital standards support more equitable and accessible services.</span></li>
+              <li><span class="icon">✔</span><span>Strengthened my motivation to contribute to public-impact digital work in future roles.</span></li>
+            </ul>
+          </div>
+          <div class="reflection-illustration">
+            <div class="reflection-illustration-inner">
+              <div class="reflection-illustration-icon">🌐</div>
+              <div>Working with digital standards highlighted how design decisions affect people across Ontario.</div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Conclusion -->
+      <section id="conclusion" class="section">
+        <h2 class="section-heading">
+          <span class="bar"></span> Conclusion & Acknowledgments
+        </h2>
+        <div class="card conclusion-card animate-on-scroll">
+          <p>
+            This work term helped me grow as a researcher, collaborator, and designer of digital services.
+            I gained practical experience applying digital standards, analyzing data, and working with a
+            multidisciplinary team focused on improving public services.
+          </p>
+          <p>
+            I appreciate the guidance and encouragement from my supervisor, Nikki Isaac, and the Digital
+            Service Advisory team, who created a supportive space to learn, ask questions, and experiment
+            with new ways of working.
+          </p>
+          <p class="footer-note">
+            This page was created as my Bachelor of Computing Co-op Work Term Report and reflects my own
+            experiences and learning during the Fall 2025 work term.
+          </p>
+
+          <button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <span>Back to top</span> <span>▲</span>
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Preloader fade-out and page reveal
+    window.addEventListener("load", function () {
+      const preloader = document.getElementById("preloader");
+      const wrapper = document.getElementById("page-wrapper");
+      setTimeout(() => {
+        preloader.style.opacity = "0";
+        preloader.style.transition = "opacity 0.5s ease-out";
+        setTimeout(() => {
+          preloader.style.display = "none";
+          wrapper.classList.add("ready");
+        }, 520);
+      }, 900); // small delay for Wix-y feel
+    });
+
+    // Scroll-triggered animations
+    const animated = document.querySelectorAll(".animate-on-scroll");
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    animated.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
